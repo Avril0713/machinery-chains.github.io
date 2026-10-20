@@ -1057,6 +1057,177 @@
         .quote-modal-box .copy-email-btn:hover {
             background: #555;
         }
+
+        /* ===== 手机端横屏适配 (max-width: 768px) and (orientation: landscape) ===== */
+        @media (max-width: 768px) and (orientation: landscape) {
+            /* 导航栏压缩高度 */
+            .header-inner {
+                height: 50px;
+                padding: 8px 15px;
+            }
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            .logo-text {
+                font-size: 13px;
+            }
+            .logo-text span {
+                font-size: 9px;
+            }
+            .nav-menu > li > a {
+                height: 50px;
+                line-height: 50px;
+                padding: 0 15px;
+                font-size: 13px;
+            }
+            
+            /* Hero区域高度调整 - 横屏时高度有限，需要压缩 */
+            #hero {
+                height: 280px;
+            }
+            .slide-content h1 {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+            .slide-content p {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+            .slide-content .btn {
+                padding: 10px 25px;
+                font-size: 13px;
+            }
+            .slider-dots {
+                bottom: 15px;
+            }
+            .dot {
+                width: 14px;
+                height: 14px;
+            }
+            
+            /* 产品卡片网格 - 横屏时可用更多宽度，改为2列 */
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            /* 产品图片高度调整 */
+            .product-img-link {
+                height: 160px;
+            }
+            
+            /* Section padding压缩 */
+            .section {
+                padding: 40px 15px;
+            }
+            .section-title {
+                margin-bottom: 30px;
+            }
+            .section-title h2 {
+                font-size: 28px;
+            }
+            .section-title p {
+                font-size: 13px;
+            }
+            
+            /* About区域压缩 */
+            .about-text h3 {
+                font-size: 22px;
+            }
+            .about-text p {
+                font-size: 14px;
+            }
+            .about-feature {
+                padding: 15px;
+                gap: 15px;
+            }
+            .feature-icon {
+                font-size: 24px;
+            }
+            .feature-content h4 {
+                font-size: 16px;
+            }
+            .feature-content p {
+                font-size: 14px;
+            }
+            
+            /* 产品详情页布局调整 */
+            .product-detail-content {
+                padding: 20px 10px;
+                gap: 20px;
+            }
+            .product-detail-info h3 {
+                font-size: 20px;
+            }
+            .product-detail-info p {
+                font-size: 14px;
+            }
+            
+            /* 联系区域压缩 */
+            .contact-info h3 {
+                font-size: 20px;
+            }
+            
+            /* 搜索框横屏适配 */
+            .search-box {
+                margin-right: 10px;
+            }
+            .search-input {
+                width: 140px;
+                font-size: 12px;
+                padding: 5px 10px;
+            }
+            .search-input:focus {
+                width: 180px;
+            }
+            .search-btn {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+            
+            /* 页脚压缩 */
+            #footer {
+                padding: 20px 15px;
+                font-size: 13px;
+            }
+            
+            /* 产品卡片信息压缩 */
+            .product-info {
+                padding: 12px 10px;
+            }
+            .product-info h3 {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+            .product-info p {
+                font-size: 12px;
+            }
+            
+            /* 报价弹窗横屏适配 */
+            .quote-modal-box {
+                padding: 25px 20px;
+                max-width: 480px;
+            }
+            .quote-modal-box h3 {
+                font-size: 20px;
+            }
+            
+            /* Gallery缩略图横屏适配 */
+            .gallery-thumbnails img {
+                width: 75px;
+                height: 75px;
+            }
+            .gallery-main-img {
+                max-height: 300px;
+            }
+            
+            /* 防止横屏时横向滚动 */
+            body {
+                overflow-x: hidden;
+            }
+        }
 </style>
 </head>
 <body>
@@ -2727,8 +2898,8 @@
             goToSlide(currentSlide + 1);
         }
 
-        // Auto-advance slides every 5 seconds
-        let slideInterval = setInterval(nextSlide, 5000);
+        // Auto-advance slides every 6 seconds
+        let slideInterval = setInterval(nextSlide, 6000);
 
         // ===== SPA Page Navigation =====
         const pages = document.querySelectorAll('.page');
@@ -2763,7 +2934,7 @@
             if (pageName !== 'home') {
                 clearInterval(slideInterval);
             } else {
-                slideInterval = setInterval(nextSlide, 5000);
+                slideInterval = setInterval(nextSlide, 6000);
             }
 
             // Scroll to top
@@ -2775,6 +2946,7 @@
         productNavLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 
                 const productId = this.getAttribute('data-product-id');
                 showProductDetail(productId);
@@ -2788,6 +2960,7 @@
         modelNavLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 
                 const modelId = this.getAttribute('data-model-id');
                 const productCategory = this.getAttribute('data-product-category');
@@ -2802,7 +2975,9 @@
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const pageName = this.getAttribute('data-page');
-                navigateTo(pageName);
+                if (pageName) {
+                    navigateTo(pageName);
+                }
             });
         });
 
