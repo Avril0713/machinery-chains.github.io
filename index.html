@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NINGBO DISCOVERY MACHINERY PARTS FACTORY</title>
     <meta name="keywords" content="riveting chain, pintle chain, sprocket, casting link, conveyor drag chain, rivetless chain, detachable chain, blocks, attachment, hub, machinery parts, Ningbo, factory">
     <meta name="description" content="Ningbo Discovery Machinery Parts Factory - Professional manufacturer of riveting chains, pintle chains, sprockets, casting links, rivetless chains, detachable chains, blocks & attachments, hubs and machinery parts.">
@@ -607,7 +607,36 @@
             .about-content { max-width: 100%; }
             .contact-wrapper { flex-direction: column; }
         }
-        @media (max-width: 768px) {
+        
+        /* ===== Hamburger Menu Button ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 22px;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+@media (max-width: 768px) {
             .header-inner { flex-direction: column; height: auto; padding: 15px 20px; }
             .nav-menu { flex-direction: column; width: 100%; }
             .nav-menu > li > a { height: auto; padding: 12px 20px; text-align: left; }
@@ -622,8 +651,115 @@
             .detail-actions .quote-now-btn { width: 100%; padding: 14px 20px; font-size: 14px; }
             .back-buttons-row { flex-direction: column; width: 100%; }
             .back-buttons-row .btn { width: 100%; min-width: auto; }
-        }
 
+
+
+            /* Show hamburger on mobile */
+            .hamburger { display: flex; }
+            /* Prevent horizontal scroll */
+            body { overflow-x: hidden; }
+            /* Touch action for all interactive elements */
+            a, button, .product-img-link, .dot, .model-tag, .gallery-thumbnails img {
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            /* Increase dot size for touch */
+            .dot {
+                width: 16px;
+                height: 16px;
+            }
+            /* Search box mobile fix - full width */
+            .search-box {
+                width: 100%;
+                margin-right: 0;
+                margin-top: 10px;
+            }
+            .search-input {
+                width: 100%;
+            }
+            .search-input:focus {
+                width: 100%;
+            }
+            .search-results {
+                width: 100%;
+                right: 0;
+                min-width: auto;
+            }
+            /* Nav menu mobile - hide by default, show when open */
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #2c2c2c;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            }
+            .nav-menu.open {
+                display: flex;
+            }
+            .nav-menu > li {
+                width: 100%;
+                border-top: 1px solid #3a3a3a;
+            }
+            .nav-menu > li > a {
+                height: auto;
+                padding: 14px 20px;
+                text-align: left;
+                min-height: 44px;
+                line-height: 1.5;
+                display: flex;
+                align-items: center;
+            }
+            /* Mobile dropdown - expand on click */
+            .nav-menu > li > ul {
+                position: static;
+                box-shadow: none;
+                border-top: none;
+                background: #333;
+                display: none;
+            }
+            .nav-menu > li > ul.mobile-open {
+                display: block;
+            }
+            .nav-menu > li > ul li a {
+                color: #ccc;
+                padding-left: 40px;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+            }
+            /* Nested submenu mobile */
+            .nav-menu > li > ul li > ul {
+                position: static;
+                box-shadow: none;
+                border-top: none;
+                background: #444;
+                max-height: 320px;
+                overflow-y: auto;
+                display: none;
+            }
+            .nav-menu > li > ul li > ul.mobile-open {
+                display: block;
+            }
+            .nav-menu > li > ul li > ul li a {
+                color: #ccc;
+                padding-left: 60px;
+                min-height: 38px;
+                display: flex;
+                align-items: center;
+            }
+            /* Product detail padding fix for mobile */
+            .product-detail-content {
+                padding: 20px 15px;
+                gap: 30px;
+            }
+            /* Gallery thumbnails smooth scroll on iOS */
+            .gallery-thumbnails {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
         /* ===== PLACEHOLDER IMAGES (CSS patterns) ===== */
 
 
@@ -935,7 +1071,12 @@
                     <span>MACHINERY PARTS FACTORY</span>
                 </div>
             </div>
-                        <ul class="nav-menu">
+                        <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+                <ul class="nav-menu" id="nav-menu">
                 <li><a href="javascript:void(0)" class="nav-link active" data-page="home">Home</a></li>
                 
                 <li>
@@ -2634,7 +2775,7 @@
         productNavLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopImmediatePropagation();
+                
                 const productId = this.getAttribute('data-product-id');
                 showProductDetail(productId);
                 // Close dropdown by removing hover state
@@ -2647,7 +2788,7 @@
         modelNavLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopImmediatePropagation();
+                
                 const modelId = this.getAttribute('data-model-id');
                 const productCategory = this.getAttribute('data-product-category');
                 showModelDetail(modelId, productCategory);
@@ -2718,7 +2859,7 @@
         productImgLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopImmediatePropagation();
+                
                 // Check if this is a model card (has data-model-id) or a category card (has data-product-id)
                 const modelId = this.getAttribute('data-model-id');
                 const productCategory = this.getAttribute('data-product-category');
@@ -2889,7 +3030,7 @@ document.querySelectorAll('.product-gallery').forEach(function(gallery) {
         document.querySelectorAll('.model-back-btn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopImmediatePropagation();
+                
                 const productCategory = this.getAttribute('data-product-category');
                 // Navigate to the product detail page for this category
                 showProductDetail('product-' + productCategory);
@@ -3008,7 +3149,7 @@ document.querySelectorAll('.product-gallery').forEach(function(gallery) {
                 
                 if (text.includes(query) || (modelId && modelId.toLowerCase().includes(query))) {
                     // Get the parent product category name
-                    var parentLink = link.closest('li').closest('li')?.querySelector('.product-nav-link');
+                    var parentLink = function(){var p=link.closest('li');if(!p)return null;var pp=p.closest('li');return pp?pp.querySelector('.product-nav-link'):null}();
                     var parentCategory = parentLink ? parentLink.textContent.trim() : 'Product';
                     
                     results.push({
@@ -3074,6 +3215,128 @@ document.querySelectorAll('.product-gallery').forEach(function(gallery) {
             var searchResults = document.getElementById('search-results');
             if (searchResults && !e.target.closest('.search-box')) {
                 searchResults.style.display = 'none';
+            }
+        });
+    
+        // ===== Mobile Hamburger Menu Toggle =====
+        var hamburger = document.getElementById('hamburger');
+        var navMenu = document.getElementById('nav-menu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('open');
+            });
+            // Close menu when clicking a nav link (page navigation)
+            var navLinksInMenu = navMenu.querySelectorAll('.nav-link');
+            navLinksInMenu.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('open');
+                });
+            });
+        }
+        
+        // ===== Mobile Dropdown Toggle (click instead of hover) =====
+        // For product nav links in dropdown (add submenu toggle)
+        document.querySelectorAll('.nav-menu > li > ul li > ul').forEach(function(submenu) {
+            var parentLi = submenu.parentElement;
+            var parentLink = parentLi.querySelector(':scope > a');
+            if (parentLink) {
+                parentLink.addEventListener('click', function(e) {
+                    // Toggle submenu display on mobile
+                    var submenu2 = this.parentElement.querySelector(':scope > ul');
+                    if (submenu2) {
+                        e.preventDefault();
+                        submenu2.classList.toggle('mobile-open');
+                    }
+                });
+            }
+        });
+        
+        // Also handle top-level nav items that have dropdowns - toggle on click for mobile
+        document.querySelectorAll('.nav-menu > li > a.product-nav-link').forEach(function(topLink) {
+            topLink.addEventListener('click', function(e) {
+                // On mobile, toggle the dropdown instead of navigating
+                var dropdown = this.parentElement.querySelector(':scope > ul');
+                if (dropdown && window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                }
+            });
+        });
+        
+        // ===== Slider Touch Support (Swipe) =====
+        var heroSlider = document.getElementById('hero');
+        if (heroSlider) {
+            var touchStartX = 0;
+            var touchEndX = 0;
+            var touchThreshold = 50;
+            
+            heroSlider.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            heroSlider.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                var diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > touchThreshold) {
+                    if (diff > 0) {
+                        // Swipe left - next slide
+                        goToSlide(currentSlide + 1);
+                    } else {
+                        // Swipe right - previous slide
+                        goToSlide(currentSlide - 1);
+                    }
+                }
+            }
+        }
+        
+        // ===== Dot click touch optimization =====
+        dots.forEach(function(dot) {
+            dot.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                var index = Array.prototype.indexOf.call(dots, this);
+                goToSlide(index);
+            });
+        });
+        
+        // ===== Prevent double-tap zoom on interactive elements =====
+        (function() {
+            var lastTouchEnd = 0;
+            document.addEventListener('touchend', function(e) {
+                var now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, { passive: false });
+        })();
+        
+        // ===== Close mobile menu when clicking outside =====
+        document.addEventListener('click', function(e) {
+            if (navMenu && hamburger) {
+                if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('open');
+                }
+            }
+        });
+        
+        // ===== Resize handler: reset mobile menu state on desktop =====
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                var hamburger2 = document.getElementById('hamburger');
+                var navMenu2 = document.getElementById('nav-menu');
+                if (hamburger2) hamburger2.classList.remove('active');
+                if (navMenu2) navMenu2.classList.remove('open');
+                // Remove all mobile-open classes
+                document.querySelectorAll('.mobile-open').forEach(function(el) {
+                    el.classList.remove('mobile-open');
+                });
             }
         });
     </script>
