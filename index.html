@@ -2853,14 +2853,15 @@
                     <div class="contact-icon">&#9742;</div>
                     <div class="contact-detail">
                         <h4>Telephone</h4>
-                        <p>+86-135-6748-2507</p>
+                        <p>+86-138-1981-7052</p>
                     </div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon">&#9993;</div>
                     <div class="contact-detail">
                         <h4>Email</h4>
-                        <p>discovery.machinery@gmail.com </p>
+                        <p>discovery.machinery@gmail.com</p>
+                        <p>discoverymachinery@foxmail.com</p>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -3298,7 +3299,7 @@ document.querySelectorAll('.product-gallery').forEach(function(gallery) {
         
         // Copy email to clipboard
         function copyEmailText() {
-            navigator.clipboard.writeText('discovery.machinery@gmail.com ').then(function() {
+            navigator.clipboard.writeText('discovery.machinery@gmail.com\ndiscoverymachinery@foxmail.com').then(function() {
                 var btns = document.querySelectorAll('.copy-email-btn');
                 btns.forEach(function(btn) {
                     var originalText = btn.textContent;
@@ -3309,7 +3310,7 @@ document.querySelectorAll('.product-gallery').forEach(function(gallery) {
                 });
             }).catch(function() {
                 var textArea = document.createElement('textarea');
-                textArea.value = 'discovery.machinery@gmail.com ';
+                textArea.value = 'discovery.machinery@gmail.com\ndiscoverymachinery@foxmail.com';
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand('copy');
@@ -3609,7 +3610,7 @@ document.querySelectorAll('.product-gallery').forEach(function(gallery) {
             <h3>Request a Quote</h3>
             <p>Interested in our products? Please contact us for a custom quote.</p>
             <p>Product: <span id="modal-product-name" class="product-name">Product</span></p>
-            <p>Email: <span class="email-display"><a href="mailto:discovery.machinery@gmail.com ">discovery.machinery@gmail.com </a></span></p>
+            <p>Email: <span class="email-display"><a href="mailto:discovery.machinery@gmail.com">discovery.machinery@gmail.com</a></span> <span class="email-display"><a href="mailto:discoverymachinery@foxmail.com">discoverymachinery@foxmail.com</a></span></p>
             <button type="button" class="copy-email-btn" onclick="copyEmailText()">Copy Email Address</button>
         </div>
     </div>
